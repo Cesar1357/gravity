@@ -3,14 +3,14 @@ import csv
 from dataclasses import replace
 import pandas as pd
 
-info = pd.read_csv('./final_df.csv')
+info = pd.read_csv('./final_data.csv')
 planets = pd.DataFrame(info)
 
-planets['Radius']=planets['Radius'].to_string()
 planets['Radius']=planets['Radius'].apply(lambda  x: x.replace('$', '').replace(',', '')).astype('float')
 
 radius = planets['Radius'].to_list()
 mass = planets['Mass'].to_list()
+
 gravity = []
 
 def convert_to_si(radius,mass):
@@ -29,4 +29,5 @@ def gravity_calculation(radius,mass):
 gravity_calculation(radius,mass)
 
 planets['Gravity'] = gravity
-print(planets['Gravity']) 
+planets.to_csv("Nuevo.csv")
+
